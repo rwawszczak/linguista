@@ -1,0 +1,28 @@
+.register-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  min-height: 150px;
+  max-height: 500px;
+  height: 100%;
+
+  position: absolute;
+  border-radius: 3px;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.register-full-width {
+  width: 100%;
+}
+
+.register-button{
+  width: 100%;
+}
+
+.register-header {
+  text-align: center;
+}
