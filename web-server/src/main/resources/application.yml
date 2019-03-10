@@ -1,0 +1,18 @@
+server:
+  port: 9048
+  servlet:
+    contextPath: /linguista
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/linguista
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+app:
+  jwtSecret: superSecretOIASD(*@&#@)( #TODO change
+  jwtExpirationInMs: 86400000

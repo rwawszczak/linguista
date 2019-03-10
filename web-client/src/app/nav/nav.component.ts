@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthoritiesService} from "../_services";
 
 @Component({
   selector: 'app-nav',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authoritiesService: AuthoritiesService
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  isAdmin() {
+    return this.authoritiesService.isAdmin();
+  }
+
+  isLogged() {
+    return this.authoritiesService.isLogged();
   }
 
 }

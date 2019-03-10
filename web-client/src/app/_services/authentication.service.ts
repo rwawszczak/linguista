@@ -7,13 +7,13 @@ import {Login} from '../_models';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private userUrl = '/api';
+  private apiUrl = '/api';
 
   constructor(private http: HttpClient) {
   }
 
   login(login: Login) {
-    return this.http.post<any>(this.userUrl + `/auth/signin`, login)
+    return this.http.post<any>(this.apiUrl + `/auth/signin`, login)
       .pipe(map(userWithToken => {
         if (userWithToken && userWithToken.accessToken) {
           localStorage.setItem('currentUser', JSON.stringify(userWithToken));
@@ -26,7 +26,7 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
   register(user: Login) {
-    return this.http.post<Login>(this.userUrl + '/auth/signup', user);
+    return this.http.post<Login>(this.apiUrl + '/auth/signup', user);
   }
 
 }

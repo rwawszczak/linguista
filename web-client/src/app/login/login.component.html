@@ -4,7 +4,7 @@
     <h1 class="mat-h1 login-header">Zaloguj się</h1>
 
     <mat-form-field class="login-full-width">
-      <input matInput placeholder="Nazwa użytkownika lub email" name="email" id="email" [formControl]="emailFormControl">
+      <input matInput placeholder="Email" name="email" id="email" [formControl]="emailFormControl">
       <mat-error *ngIf="emailFormControl.hasError('required')">
         Podaj adres email
       </mat-error>

@@ -2,6 +2,8 @@ import {MatButtonModule, MatFormFieldModule, MatInputModule, MatSnackBarModule} 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {NgModule} from "@angular/core";
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [MatButtonModule,
@@ -9,13 +11,17 @@ import {NgModule} from "@angular/core";
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule],
+    MatSnackBarModule,
+    MatMenuModule,
+    MatSelectModule],
   exports: [MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule],
+    MatSnackBarModule,
+    MatMenuModule,
+    MatSelectModule],
 })
 
 export class MaterialModule {}

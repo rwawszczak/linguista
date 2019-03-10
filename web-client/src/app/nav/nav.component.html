@@ -3,9 +3,14 @@
     <mat-toolbar-row>
       <img routerLink="/" class="toolbar-logo" src="../../assets/white_logo.png" alt="Linguista logo">
       <span class="example-spacer"></span>
-      <button routerLink="/" mat-button><mat-icon class="example-icon">home</mat-icon></button>
+      <button routerLink="/" mat-button title="Strona główna"><mat-icon class="example-icon">home</mat-icon></button>
+      <button routerLink="/addUser" mat-button *ngIf="isAdmin()" title="Dodaj użytkownika"><mat-icon class="example-icon">add_circle_outline</mat-icon></button>
       <button routerLink="/about" mat-button><mat-icon class="example-icon">work</mat-icon></button>
-      <button routerLink="/login" mat-button><mat-icon class="example-icon">account_circle</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="user"><mat-icon class="example-icon"  title="Użytkownik">account_circle</mat-icon></button>
+      <mat-menu #user="matMenu">
+        <button routerLink="/login" mat-menu-item *ngIf="isLogged()">Wyloguj</button>
+        <button routerLink="/login" mat-menu-item *ngIf="!isLogged()" >Zaloguj</button>
+      </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
