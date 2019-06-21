@@ -1,7 +1,13 @@
 ::ng-deep snack-bar-container.error-snackbar {
   background-color: #e45346;
 }
-::ng-deep .error-snackbar .mat-simple-snackbar {
+::ng-deep snack-bar-container.warn-snackbar {
+  background-color: #dfc453;
+}
+::ng-deep snack-bar-container.info-snackbar {
+  background-color: #56a556;
+}
+::ng-deep .mat-simple-snackbar {
   color: #fff;
   text-align: center;
   font-weight: bold;

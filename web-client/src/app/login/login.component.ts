@@ -56,9 +56,17 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(login)
       .pipe(first())
       .subscribe(
-        () => {
+        userWithToken => {
           this.snackBar.dismiss();
-          this.router.navigate([this.returnUrl]);
+          if (!userWithToken.temporary) {
+            this.router.navigate([this.returnUrl]);
+          } else {
+            this.router.navigate(['changePassword']);
+            this.snackBar.open('Logujesz się za pomocą hasła tymczasowego, aby w pełni aktywować konto zmień hasło.', null, {
+              duration: 10000,
+              panelClass: ['warn-snackbar']
+            });
+          }
         },
         error => {
           this.error = error;

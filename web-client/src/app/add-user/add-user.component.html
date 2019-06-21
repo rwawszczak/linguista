@@ -1,21 +1,21 @@
 <div class="col-md-6">
 
-  <form class="login-form" (ngSubmit)="createUser()">
-    <h1 class="mat-h1 login-header">Dodaj użytkownika</h1>
+  <form class="add-user-form" (ngSubmit)="createUser()">
+    <h1 class="mat-h1 add-user-header">Dodaj użytkownika</h1>
 
-    <mat-form-field class="login-full-width">
+    <mat-form-field class="add-user-full-width">
       <input matInput required placeholder="Email" name="email" id="email" [formControl]="emailFormControl">
       <mat-error *ngIf="emailFormControl.hasError('required')">
         Podaj adres email
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="login-full-width">
+    <mat-form-field class="add-user-full-width">
       <mat-select placeholder="Typ użytkownika" required [formControl]="roleFormControl">
-        <mat-option *ngFor="let role of roles" value="{{role.id}}">{{getRoleDisplayName(role.name)}}</mat-option>
+        <mat-option *ngFor="let role of roles" value="{{role.id}}">{{getRoleDisplayName(role)}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-flat-button class="login-button">Dodaj</button>
+    <button mat-flat-button class="add-user-button">Dodaj</button>
 
   </form>
 

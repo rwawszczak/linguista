@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Role {
     @Id
     private Long id;
-    @Enumerated(EnumType.STRING)
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private RoleName name;
 

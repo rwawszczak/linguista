@@ -10,13 +10,13 @@ import linguista.webserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -32,22 +32,24 @@ public class UsersController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateRequest createRequest) {
         if(userRepository.existsByEmail(createRequest.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
+            return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
         Role role = roleRepository.findById(createRequest.getRoleId())
                 .orElseThrow(() -> new AppException("User Role do not exist."));
         if(!role.getName().isAvailable()) {
-            return new ResponseEntity(new ApiResponse(false, "Selected role is not available for assignment.!"),
+            return new ResponseEntity<>(new ApiResponse(false, "Selected role is not available for assignment.!"),
                     HttpStatus.BAD_REQUEST);
         }
 

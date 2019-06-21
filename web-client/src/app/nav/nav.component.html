@@ -8,6 +8,7 @@
       <button routerLink="/about" mat-button><mat-icon class="example-icon">work</mat-icon></button>
       <button mat-button [matMenuTriggerFor]="user"><mat-icon class="example-icon"  title="Użytkownik">account_circle</mat-icon></button>
       <mat-menu #user="matMenu">
+        <button routerLink="/changePassword" mat-menu-item *ngIf="isLogged()">Zmień hasło</button>
         <button routerLink="/login" mat-menu-item *ngIf="isLogged()">Wyloguj</button>
         <button routerLink="/login" mat-menu-item *ngIf="!isLogged()" >Zaloguj</button>
       </mat-menu>

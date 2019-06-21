@@ -6,6 +6,7 @@ public class JwtAuthenticationResponse {
     private String accessToken;
     private Collection<String> authorities;
     private String tokenType = "Bearer";
+    private boolean isTemporary;
 
     public JwtAuthenticationResponse(String accessToken) {
         this.accessToken = accessToken;
@@ -33,5 +34,13 @@ public class JwtAuthenticationResponse {
 
     public void setAuthorities(Collection<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isTemporary() {
+        return isTemporary;
+    }
+
+    public void setTemporary(boolean temporary) {
+        isTemporary = temporary;
     }
 }

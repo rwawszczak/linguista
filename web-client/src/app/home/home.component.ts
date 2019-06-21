@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthoritiesService} from "../_services";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authoritiesService: AuthoritiesService
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  isAdmin() {
+    return this.authoritiesService.isAdmin();
+  }
+
+  isStudent() {
+    return this.authoritiesService.isStudent();
+  }
+
+  isLecturer() {
+    return this.authoritiesService.isLecturer();
   }
 
 }

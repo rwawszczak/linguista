@@ -17,13 +17,14 @@ public class UserPrincipal implements UserDetails {
     private String email;
     @JsonIgnore
     private String password;
-
+    private boolean isTemporary;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(String uid, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    private UserPrincipal(String uid, String email, String password, boolean isTemporary, Collection<? extends GrantedAuthority> authorities) {
         this.uid = uid;
         this.email = email;
         this.password = password;
+        this.isTemporary = isTemporary;
         this.authorities = authorities;
     }
 
@@ -36,6 +37,7 @@ public class UserPrincipal implements UserDetails {
                 user.getUid(),
                 user.getEmail(),
                 user.getPassword(),
+                user.isTemporary(),
                 authorities
         );
     }
@@ -50,6 +52,10 @@ public class UserPrincipal implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isTemporary() {
+        return isTemporary;
     }
 
     @Override

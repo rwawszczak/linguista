@@ -5,6 +5,8 @@ import {FormControl, Validators} from "@angular/forms";
 import {Create} from "../_models/create";
 import {MatSnackBar} from "@angular/material";
 import {Router} from "@angular/router";
+import {RoleNameTranslator} from "../_util/roleNameTranslator";
+import {Role} from "../_models/role";
 
 @Component({
   selector: 'app-add-user',
@@ -12,13 +14,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./add-user.component.scss']
 })
 export class AddUserComponent implements OnInit {
-
   roles: Object[];
   error = '';
-  displayNames = {
-    ROLE_STUDENT: "Uczeń",
-    ROLE_LECTURER: "Lektor"
-  };
+  translator = RoleNameTranslator.getInstance();
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
   ]);
@@ -40,8 +38,8 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  getRoleDisplayName(role: string) {
-    let displayName = this.displayNames[role];
+  getRoleDisplayName(role: Role) {
+    let displayName = this.translator.translate(role);
     return displayName ? displayName : role;
   }
 

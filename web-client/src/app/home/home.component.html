@@ -1,3 +1,3 @@
-<p>
-  home works!
-</p>
+<p *ngIf="isStudent()">Jesteś zalogowany jako uczeń.</p>
+<p *ngIf="isLecturer()">Jesteś zalogowany jako nauczyciel.</p>
+<app-user-list *ngIf="isAdmin()"></app-user-list>
