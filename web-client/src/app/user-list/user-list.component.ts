@@ -2,10 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {first} from "rxjs/operators";
 import {UserService} from "../_services";
 import {User} from "../_models/user";
-import {RoleNameTranslator} from "../_util/roleNameTranslator";
+import {RoleUtil} from "../_util/roleUtil";
 import {Role} from "../_models/role";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +14,7 @@ import {MatSort} from "@angular/material";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['email', 'roles', 'stateText', 'tempPassword'];
+  displayedColumns: string[] = ['icon', 'email', 'roles', 'created', 'stateText', 'tempPassword'];
   dataSource: MatTableDataSource<any>;
 
 
@@ -25,13 +26,15 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
+    let pipe = new DatePipe('pl');
     this.userService.getAll().pipe(first()).subscribe(users => {
       let displayUsers = users.map(function (user: User) {
-        let roles = UserListComponent.getRoles(user.roles);
         let stateText = user.temporary ? 'Utworzony' : 'Aktywny';
         return {
+          icon: UserListComponent.getIcon(user.roles),
           email: user.email,
-          roles: roles,
+          roles: UserListComponent.getRoles(user.roles),
+          created: pipe.transform(user.created, 'longDate'),
           stateText: stateText,
           tempPassword: user.temporary ? user.temporaryPassword : '--'
         }
@@ -46,11 +49,16 @@ export class UserListComponent implements OnInit {
   }
 
   static getRoles(roles: Role[]) {
-    let translator = RoleNameTranslator.getInstance();
+    let roleUtil = RoleUtil.getInstance();
     let names = roles.map(function (role) {
-      return translator.translate(role);
+      return roleUtil.translate(role);
     });
     return names.join(', ');
+  }
+
+  static getIcon(roles: Role[]) {
+    let roleUtil = RoleUtil.getInstance();
+    return roleUtil.getRoleIcon(roleUtil.getMostImportant(roles));
   }
 
 }

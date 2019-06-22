@@ -16,6 +16,10 @@ import {RegisterComponent} from "./register/register.component";
 import {AddUserComponent} from './add-user/add-user.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import localePl from '@angular/common/locales/pl';
+import {registerLocaleData} from "@angular/common";
+
+registerLocaleData(localePl, 'pl');
 
 @NgModule({
   declarations: [

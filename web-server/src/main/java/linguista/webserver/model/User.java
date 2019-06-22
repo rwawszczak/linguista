@@ -1,6 +1,7 @@
 package linguista.webserver.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ public class User {
     private String password;
     private String temporaryPassword;
     private boolean temporary;
+    private Date created;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -74,5 +76,13 @@ public class User {
 
     public void setTemporary(boolean temporary) {
         this.temporary = temporary;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

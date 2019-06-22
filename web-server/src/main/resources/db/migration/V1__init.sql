@@ -4,6 +4,7 @@ email VARCHAR(255),
 password  VARCHAR(255),
 temporary_password  VARCHAR(255),
 temporary BOOLEAN,
+created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (uid));
 
 CREATE TABLE role(

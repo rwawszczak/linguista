@@ -5,7 +5,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {Create} from "../_models/create";
 import {MatSnackBar} from "@angular/material";
 import {Router} from "@angular/router";
-import {RoleNameTranslator} from "../_util/roleNameTranslator";
+import {RoleUtil} from "../_util/roleUtil";
 import {Role} from "../_models/role";
 
 @Component({
@@ -16,7 +16,7 @@ import {Role} from "../_models/role";
 export class AddUserComponent implements OnInit {
   roles: Object[];
   error = '';
-  translator = RoleNameTranslator.getInstance();
+  translator = RoleUtil.getInstance();
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
   ]);
