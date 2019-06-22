@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   returnUrl: string;
-  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,7 +68,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error => {
-          this.error = error;
+          console.warn(error);
           this.snackBar.open('Email i/lub hasło są niepoprawne.', null, {
             duration: 5000,
             panelClass: ['error-snackbar']

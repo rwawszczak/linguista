@@ -1,5 +1,5 @@
 import {
-  MatButtonModule,
+  MatButtonModule, MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule, MatSortModule,
@@ -21,7 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatMenuModule,
     MatSelectModule,
     MatTableModule,
-    MatSortModule,],
+    MatSortModule,
+    MatDialogModule],
   exports: [MatButtonModule,
     MatToolbarModule,
     MatIconModule,
@@ -31,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatMenuModule,
     MatSelectModule,
     MatTableModule,
-    MatSortModule],
+    MatSortModule,
+    MatDialogModule],
 })
 
 export class MaterialModule {

@@ -7,6 +7,8 @@ import linguista.webserver.payload.ApiResponse;
 import linguista.webserver.payload.CreateRequest;
 import linguista.webserver.repository.RoleRepository;
 import linguista.webserver.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
+    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -42,13 +46,13 @@ public class UsersController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateRequest createRequest) {
-        if(userRepository.existsByEmail(createRequest.getEmail())) {
+        if (userRepository.existsByEmail(createRequest.getEmail())) {
             return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
         Role role = roleRepository.findById(createRequest.getRoleId())
                 .orElseThrow(() -> new AppException("User Role do not exist."));
-        if(!role.getName().isAvailable()) {
+        if (!role.getName().isAvailable()) {
             return new ResponseEntity<>(new ApiResponse(false, "Selected role is not available for assignment.!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -56,9 +60,7 @@ public class UsersController {
         // Creating user's account
         String temporaryPassword = generateTemporaryPassword();
         User user = new User(createRequest.getEmail(), temporaryPassword);
-        user.setTemporaryPassword(temporaryPassword);
-        user.setTemporary(true);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        setTemporary(user, temporaryPassword);
         user.setRoles(Collections.singleton(role));
         user.setUid(UUID.randomUUID().toString());
         User result = userRepository.save(user);
@@ -70,9 +72,27 @@ public class UsersController {
         return ResponseEntity.created(location).body(new ApiResponse(true, "User created successfully"));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/resetPassword")
+    public ResponseEntity<User> resetPassword(@RequestParam String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> {
+            logger.error("Could not find the user with email: " + email);
+            return new AppException("No user found by email");
+        });
+        setTemporary(user, generateTemporaryPassword());
+        User saved = userRepository.save(user);
+        return ResponseEntity.ok(saved);
+    }
+
+    private void setTemporary(User user, String temporaryPassword) {
+        user.setTemporaryPassword(temporaryPassword);
+        user.setTemporary(true);
+        user.setPassword(passwordEncoder.encode(temporaryPassword));
+    }
+
     private String generateTemporaryPassword() {
         StringBuilder password = new StringBuilder();
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             int charIndex = new Random().nextInt(125 - 33) + 33;
             password.append((char) charIndex);
 

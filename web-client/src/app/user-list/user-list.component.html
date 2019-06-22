@@ -29,7 +29,23 @@
   </ng-container>
   <ng-container matColumnDef="tempPassword">
     <th mat-header-cell *matHeaderCellDef> Hasło tymczasowe</th>
-    <td mat-cell *matCellDef="let user"> {{user.tempPassword}} </td>
+    <td mat-cell *matCellDef="let user">
+      {{user.tempPassword}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="copyTempPassword">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let user">
+      <button *ngIf="user.isTemporary" (click)="copyTempPasswordToClipboard(user)" mat-flat-button color="primary">
+        <mat-icon class="example-icon" title="Skopiuj hasło do schowka">assignment</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="resetPassword">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let user">
+      <button (click)="resetPassword(user)" mat-flat-button color="warn">Resetuj hasło</button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

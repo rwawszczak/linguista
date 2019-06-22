@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Login} from '../_models';
 import {Create} from "../_models/create";
 import {User} from "../_models/user";
@@ -19,6 +19,14 @@ export class UserService {
 
   getAll() {
     return this.http.get<User[]>(this.apiUrl + '/users/getAll');
+  }
+
+  resetPassword(user: User) {
+    let httpParams = new HttpParams()
+      .append("email", user.email);
+    return this.http.post(this.apiUrl + '/users/resetPassword', null, {
+      params: httpParams
+    });
   }
 
 }

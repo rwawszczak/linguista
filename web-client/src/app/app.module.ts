@@ -16,6 +16,7 @@ import {RegisterComponent} from "./register/register.component";
 import {AddUserComponent} from './add-user/add-user.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
 import localePl from '@angular/common/locales/pl';
 import {registerLocaleData} from "@angular/common";
 
@@ -31,7 +32,8 @@ registerLocaleData(localePl, 'pl');
     RegisterComponent,
     AddUserComponent,
     UserListComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ registerLocaleData(localePl, 'pl');
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class AppModule {
 }
