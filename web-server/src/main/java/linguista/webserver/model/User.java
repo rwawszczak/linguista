@@ -11,6 +11,8 @@ public class User {
     @Id
     private String uid;
     private String email;
+    private String name;
+    private String phoneNumber;
     private String password;
     private String temporaryPassword;
     private boolean temporary;
@@ -84,5 +86,21 @@ public class User {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -34,8 +34,10 @@ public class AdminUserDataLoader {
 
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        NativeQuery query = session.createSQLQuery("INSERT INTO user VALUES (:uid, :email, :password, :temporary_password, :temporary, :created)");
+        NativeQuery query = session.createSQLQuery("INSERT INTO user VALUES (:uid, :name, :phone_number, :email, :password, :temporary_password, :temporary, :created)");
         query.setParameter("uid", uid);
+        query.setParameter("name", null);
+        query.setParameter("phone_number", null);
         query.setParameter("email", "admin");
         query.setParameter("password", passwordEncoder.encode("admin"));
         query.setParameter("temporary_password", null);

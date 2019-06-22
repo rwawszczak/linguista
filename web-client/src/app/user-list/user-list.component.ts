@@ -17,7 +17,7 @@ import {CopyUtil} from "../_util/copyUtil";
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['icon', 'email', 'roles', 'created', 'stateText', 'tempPassword', 'copyTempPassword', 'resetPassword'];
+  displayedColumns: string[] = ['icon', 'name', 'phoneNumber', 'email', 'roles', 'created', 'stateText', 'tempPassword', 'copyTempPassword', 'resetPassword'];
   dataSource: MatTableDataSource<any>;
 
 
@@ -42,6 +42,8 @@ export class UserListComponent implements OnInit {
         let stateText = user.temporary ? 'Utworzony' : 'Aktywny';
         return {
           icon: UserListComponent.getIcon(user.roles),
+          name: user.name ? user.name : '--',
+          phoneNumber: user.phoneNumber ? user.phoneNumber : '--',
           email: user.email,
           roles: UserListComponent.getRoles(user.roles),
           created: pipe.transform(user.created, 'longDate'),
@@ -87,7 +89,7 @@ export class UserListComponent implements OnInit {
   }
 
   copyTempPasswordToClipboard(user: any){
-    CopyUtil.copyToClipboard(user.tempPassword)
+    CopyUtil.copyToClipboard(user.tempPassword);
     this.snackBar.open('Hasło dla użytkownika '+user.email+' zostalo skopiowane do schowka.', null, {
       duration: 5000,
       panelClass: ['info-snackbar']

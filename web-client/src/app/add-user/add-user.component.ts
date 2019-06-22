@@ -17,6 +17,8 @@ export class AddUserComponent implements OnInit {
   roles: Object[];
   error = '';
   translator = RoleUtil.getInstance();
+  nameFormControl: FormControl = new FormControl('', []);
+  phoneNumberFormControl: FormControl = new FormControl('', []);
   emailFormControl: FormControl = new FormControl('', [
     Validators.required,
   ]);
@@ -48,6 +50,8 @@ export class AddUserComponent implements OnInit {
       return;
     }
     let create = new Create();
+    create.name = this.nameFormControl.value;
+    create.phoneNumber = this.phoneNumberFormControl.value;
     create.email = this.emailFormControl.value;
     create.roleId = this.roleFormControl.value;
     this.userService.create(create)

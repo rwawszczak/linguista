@@ -60,6 +60,8 @@ public class UsersController {
         // Creating user's account
         String temporaryPassword = generateTemporaryPassword();
         User user = new User(createRequest.getEmail(), temporaryPassword);
+        user.setName(createRequest.getName());
+        user.setPhoneNumber(createRequest.getPhoneNumber());
         setTemporary(user, temporaryPassword);
         user.setRoles(Collections.singleton(role));
         user.setUid(UUID.randomUUID().toString());

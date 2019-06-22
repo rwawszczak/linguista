@@ -1,6 +1,8 @@
 CREATE TABLE user(
-uid VARCHAR(255),
-email VARCHAR(255),
+uid VARCHAR(255) UNIQUE,
+name VARCHAR(255) UNIQUE,
+phone_number VARCHAR(255) UNIQUE,
+email VARCHAR(255) UNIQUE,
 password  VARCHAR(255),
 temporary_password  VARCHAR(255),
 temporary BOOLEAN,
