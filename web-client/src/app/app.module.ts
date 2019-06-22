@@ -12,7 +12,6 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ErrorInterceptor, JwtInterceptor} from "./_helpers";
-import {RegisterComponent} from "./register/register.component";
 import {AddUserComponent} from './add-user/add-user.component';
 import {UserListComponent} from './user-list/user-list.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
@@ -29,7 +28,6 @@ registerLocaleData(localePl, 'pl');
     AboutComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent,
     AddUserComponent,
     UserListComponent,
     ChangePasswordComponent,
